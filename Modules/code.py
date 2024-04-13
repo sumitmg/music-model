@@ -15,7 +15,7 @@ df = rawdata[['key_alphabet','Key number','note_number','note_type','Frequency_c
 hindi_notes=['सा','रे','ग','म','प','ध','नि']
 
 # Open the image
-img = Image.open('C:/Sumit/music-model/Data/Image/realistic-88-piano-keys-illustration-free-vector.jpg')
+img = Image.open('./Data/Image/realistic-88-piano-keys-illustration-free-vector.jpg')
 
 key_number = df['Key number'].to_list()
 note_type = df['note_type'].to_list()
@@ -46,7 +46,7 @@ def draw_placeholder(df,key_alphabet,note_type,scale):
     root_note = df[(df['key_alphabet']==key_alphabet) & (df['note_type']==note_type) & (df['note_number']==3)]['Key number'].iloc[0]
     
     # Open the image
-    img = Image.open('C:/Sumit/music-model/Data/Image/realistic-88-piano-keys-illustration-free-vector.jpg')
+    img = Image.open('./Data/Image/realistic-88-piano-keys-illustration-free-vector.jpg')
     x,k=0,0
     for i in df_white_key:
         note_number = df_white.loc[df_white['colour_key_number']==i]['note_number'].iloc[0]
@@ -56,12 +56,14 @@ def draw_placeholder(df,key_alphabet,note_type,scale):
         y = 350
         width, height = 30, 60
         # Draw a rectangle as a placeholder
+        alpha=150
+        fill_color = (255, 255, 0, alpha)
         if classical_note == 1:
-            draw_objects[i].rectangle([x, y, x+width, y+height], outline='black', width=2, fill='magenta')
+            draw_objects[i].rectangle([x, y, x+width, y+height], fill='magenta')
         elif note_number==3:
-            draw_objects[i].rectangle([x, y, x+width, y+height], outline='black', width=2, fill='yellow')
+            draw_objects[i].rectangle([x, y, x+width, y+height], fill=fill_color)
         else:
-            draw_objects[i].rectangle([x, y, x+width, y+height], outline='black', width=2, fill='yellow')
+            draw_objects[i].rectangle([x, y, x+width, y+height], fill=fill_color)
     x,k=0,0
     for i in df_black_key:
         note_number = df_black.loc[df_black['Key number']==i]['note_number'].iloc[0]
@@ -72,11 +74,11 @@ def draw_placeholder(df,key_alphabet,note_type,scale):
         width, height = 20, 60
         # Draw a rectangle as a placeholder
         if classical_note == 1:
-            draw_objects[i].rectangle([x, y, x+width, y+height], outline='black', width=2, fill='magenta')
+            draw_objects[i].rectangle([x, y, x+width, y+height], width=2, fill='magenta')
         elif note_number==3:
-            draw_objects[i].rectangle([x, y, x+width, y+height], outline='black', width=2, fill='yellow')
+            draw_objects[i].rectangle([x, y, x+width, y+height], width=2, fill=fill_color)
         else:
-            draw_objects[i].rectangle([x, y, x+width, y+height], outline='black', width=2, fill='yellow')
+            draw_objects[i].rectangle([x, y, x+width, y+height], width=2, fill=fill_color)
     # Show the image
     # Create a drawing object
     draw_object_text = ImageDraw.Draw(img)
@@ -88,7 +90,7 @@ def draw_placeholder(df,key_alphabet,note_type,scale):
     # Draw a rectangle as a placeholder
     draw_object_text.rectangle([x, y, x+width, y+height], outline='black', width=2, fill='yellow')
 
-    font = ImageFont.truetype("C:/Sumit/music-model/Data/Font/Akshar Unicode.ttf", 20)
+    font = ImageFont.truetype("./Data/Font/Akshar Unicode.ttf", 20)
     text1=""
     if note_type=="Black":
         text1="#"
@@ -107,7 +109,14 @@ def draw_placeholder(df,key_alphabet,note_type,scale):
     # Draw a rectangle as a placeholder
     draw_object_box.rectangle([x, y, x+width, y+height], outline='red', width=2)
     # Define font
-    img.show()
+    # Define the coordinates of the crop box (left, upper, right, lower)
+    left = 345
+    upper = 50
+    right = 1360
+    lower = 600
+    # Crop the image
+    cropped_image = img.crop((left, upper, right, lower))
+    return cropped_image
 
 
 def classical_notes(key_alphabet,note_type='White',scale='Major',key_number=4):
