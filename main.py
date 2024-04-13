@@ -1,10 +1,11 @@
 import streamlit as st
 import Modules.code as cd
+import Pages.Homepage as hp
 
 
 def main():
     # Set up Streamlit app title
-    print("1")
+    hp.homepage()
 
 
 # Run the main function when the script is executed
