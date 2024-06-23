@@ -1,11 +1,11 @@
 import streamlit as st
 import Modules.code as cd
-import Pages.Homepage as hp
+import app
 
 
 def main():
     # Set up Streamlit app title
-    hp.homepage()
+    app.app()
 
 
 # Run the main function when the script is executed
