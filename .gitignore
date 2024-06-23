@@ -1,2 +1,18 @@
+# Ignore Python bytecode files
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Ignore virtual environment directories
+venv/
 .venv/
-Modules/__pycahe__/
+
+# Ignore Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# Ignore macOS specific files
+.DS_Store
+
+# Ignore other common files
+.env
+*.log
