@@ -17,3 +17,5 @@ def homepage():
     df_scale= cd.classical_notes(key_alphabet=key_alphabet,note_type=note_type,scale=scale,key_number=4)
     img = cd.draw_placeholder(df_scale, key_alphabet=key_alphabet, note_type=note_type, scale=scale)
     st.image(img, caption='Realistic Piano Keys', use_column_width=True)
+
+
